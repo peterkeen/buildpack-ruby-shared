@@ -30,12 +30,14 @@ fi
 
 cd $build_path
 
-echo "-----> Running bundler"
-/apps/.ruby/$ruby_version/bin/bundle install --without development:test --binstubs bin/ | indent
+export PATH="/apps/.ruby/$ruby_version/bin:$PATH"
 
-if bin/rake -n assets:precompile >/dev/null 2>&1; then
+echo "-----> Running bundler"
+bundle install --without development:test --binstubs bin/ | indent
+
+if rake -n assets:precompile >/dev/null 2>&1; then
     echo "-----> Precompiling assets"
-    bin/rake assets:precompile | indent
+    rake assets:precompile | indent
 fi
 
 echo "-----> Done"
