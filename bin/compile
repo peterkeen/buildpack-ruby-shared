@@ -14,7 +14,7 @@ indent() {
 
 echo "-----> Found a Ruby/Shared project"
 
-if [[ ! -e $build_path/.ruby_version ]]; then
+if [[ ! -e $build_path/.ruby-version ]]; then
     echo "No .ruby-version file found. Defaulting to 2.1.2."
     ruby_version="2.1.2"
 else
@@ -24,6 +24,9 @@ fi
 if [[ ! -e /apps/.ruby/$ruby_version ]]; then
     echo "-----> Installing Ruby"
     /apps/.ruby/ruby-build/bin/ruby-build $ruby_version /apps/.ruby/$ruby_version
+
+    echo "-----> Installing bundler"
+    /apps/.ruby/$ruby_version/bin/gem install bundler
 fi
 
 cd $build_path
