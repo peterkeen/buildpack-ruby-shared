@@ -1,7 +1,6 @@
 #!/bin/bash
 
 export PATH="bin:/usr/bin:/usr/local/bin:/usr/sbin:/bin:/sbin"
-export GEM_PATH="lib/ruby/gems/1.9.1:."
 
 set -e
 
@@ -23,16 +22,16 @@ fi
 
 if [[ ! -e /apps/.ruby/$ruby_version ]]; then
     echo "-----> Installing Ruby"
-    /apps/.ruby/ruby-build/bin/ruby-build $ruby_version /apps/.ruby/$ruby_version
+    /apps/.ruby/ruby-build/bin/ruby-build $ruby_version /apps/.ruby/$ruby_version | indent
 
     echo "-----> Installing bundler"
-    /apps/.ruby/$ruby_version/bin/gem install bundler
+    /apps/.ruby/$ruby_version/bin/gem install bundler | indent
 fi
 
 cd $build_path
 
 echo "-----> Running bundler"
-/apps/.ruby/$ruby_version/bin/bundle install --without development:test --path vendor/bundle --binstubs bin/ | indent
+/apps/.ruby/$ruby_version/bin/bundle install --without development:test --binstubs bin/ | indent
 
 if bin/rake -n assets:precompile >/dev/null 2>&1; then
     echo "-----> Precompiling assets"
