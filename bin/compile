@@ -20,8 +20,20 @@ else
     ruby_version=$(cat $build_path/.ruby-version)
 fi
 
+if [[ ! -e /apps/.ruby ]]; then
+    mkdir -p /apps/.ruby
+fi
+
+if [[ ! -e /apps/.ruby/ruby-build ]]; then
+    git clone https://github.com/rbenv/ruby-build.git /apps/.ruby/ruby-build
+fi
+
 if [[ ! -e /apps/.ruby/$ruby_version ]]; then
     echo "-----> Installing Ruby"
+    pushd /apps/.ruby-ruby-build
+    git pull origin master
+    popd
+
     /apps/.ruby/ruby-build/bin/ruby-build $ruby_version /apps/.ruby/$ruby_version | indent
 
     echo "-----> Installing bundler"
