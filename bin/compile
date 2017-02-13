@@ -50,6 +50,8 @@ bundle install --without development:test --binstubs bin/ | indent
 if rake -n assets:precompile >/dev/null 2>&1; then
     echo "-----> Precompiling assets"
     rake assets:precompile | indent
+else
+    echo "-----> Skipping asset precompile"
 fi
 
 echo "-----> Done"
