@@ -47,6 +47,10 @@ export PATH="/apps/.ruby/$ruby_version/bin:$PATH"
 echo "-----> Running bundler"
 bundle install --without development:test --binstubs bin/ | indent
 
+if [[ -e package.json ]]; then
+    npm install
+fi
+
 if rake -n assets:precompile >/dev/null 2>&1; then
     echo "-----> Precompiling assets"
     rake assets:precompile | indent
