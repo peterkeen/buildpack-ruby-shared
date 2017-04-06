@@ -48,7 +48,7 @@ echo "-----> Running bundler"
 bundle install --without development:test --binstubs bin/ | indent
 
 if [[ -e package.json ]]; then
-    ln -s node_modules /apps/.node_modules
+    ln -s /apps/.node_modules ./node_modules
     npm install --progress=false
 fi
 
