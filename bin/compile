@@ -30,7 +30,7 @@ fi
 
 if [[ ! -e /apps/.ruby/$ruby_version ]]; then
     echo "-----> Installing Ruby"
-    pushd /apps/.ruby-ruby-build
+    pushd /apps/.ruby/ruby-build
     git pull origin master
     popd
 
