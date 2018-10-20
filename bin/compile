@@ -52,12 +52,12 @@ if [[ -e package.json ]]; then
     npm install
 fi
 
-if rake -n assets:precompile >/dev/null 2>&1; then
+#if rake -n assets:precompile >/dev/null 2>&1; then
     echo "-----> Precompiling assets"
     rake assets:precompile | indent
-else
-    echo "-----> Skipping asset precompile"
-fi
+#else
+#    echo "-----> Skipping asset precompile"
+#fi
 
 echo "-----> Done"
 
